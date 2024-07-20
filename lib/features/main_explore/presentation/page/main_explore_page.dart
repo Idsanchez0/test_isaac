@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:test_isaac/core/ui/design/templates/card/error_modal_card.dart';
 import 'package:test_isaac/core/ui/design/templates/headers/dashboard_header.dart';
 import 'package:test_isaac/core/ui/design/templates/loader/loader.dart';
 import 'package:test_isaac/core/ui/design/templates/modals/middle_modal.dart';
@@ -27,10 +28,24 @@ class _MainExplorePageState extends ConsumerState<MainExplorePage> {
 
   initData() async {
     loading();
-    await ref.watch(mainExploreController.notifier).getImages();
+    bool response = await ref.watch(mainExploreController.notifier).getImages();
     setState(() {
       Navigator.pop(context);
     });
+    if (!response) {
+      showModal();
+    }
+  }
+
+  showModal() {
+    middleModals.middleModal(
+        context,
+        const ErrorModalCard(
+            message:
+                'Error al realizar la consulta por favor intentalo más tarde.',
+            title: 'Algo salió mal'),
+        Colors.white,
+        300.sp);
   }
 
   loading() {

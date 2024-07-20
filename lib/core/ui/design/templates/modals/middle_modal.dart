@@ -15,7 +15,7 @@ class MiddleModal {
                 child: ConstrainedBox(
                   constraints: BoxConstraints(minHeight: 5.sp),
                   child: Container(
-                    width: width ?? double.infinity,
+                    width: width,
                     decoration: BoxDecoration(
                       color: color ?? Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(10.sp)),

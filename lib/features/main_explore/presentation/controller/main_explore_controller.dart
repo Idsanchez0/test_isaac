@@ -9,12 +9,17 @@ class MainExploreController extends StateNotifier<MainExploreState> {
       : super(MainExploreState());
   final MainExploreRepository mainExploreRepository;
 
-  Future<void> getImages() async {
+  Future<bool> getImages() async {
     state = state.copyWith(scrollController: ScrollController(), limit: 10);
     List<MainExploreModel> data = await mainExploreRepository.getImages();
     state = state.copyWith(
       listData: data,
     );
+    if (data.isEmpty) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   Future<void> loadMoreItems() async {
@@ -24,7 +29,7 @@ class MainExploreController extends StateNotifier<MainExploreState> {
     } else {
       currentLimit = state.listData!.length;
     }
-    state=state.copyWith(limit: currentLimit);
+    state = state.copyWith(limit: currentLimit);
   }
 }
 
