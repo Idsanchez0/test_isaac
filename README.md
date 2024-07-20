@@ -6,6 +6,6 @@
 
 #Pasos para correr el aplicativo
 1. Utilizar en consola el comando flutter pub get.
-2. Utilizar el comando flutter pub run.
+2. Utilizar el comando flutter run.
 
 *Nota: no requiere confguraciones adicionales
